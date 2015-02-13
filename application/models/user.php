@@ -17,6 +17,13 @@ class User extends CI_Model {
 			array($post['email'], $post['password']))->result_array();
 	}
 
+	public function retrieve_by_email($post)
+	{
+		return $this->db->query("SELECT * FROM users 
+			WHERE email = ?",
+			array($post['email']))->result_array();
+	}
+
 	public function retrieve_all($post)
 	{
 		return $this->db->query("SELECT * FROM users ORDER BY id DESC")->result_array();

@@ -27,7 +27,7 @@ This page needs:
 		<a href="/books/add_book_review">Add Book and Review</a>
 		<a href="/users/logout">Logout</a>
 	</div>
-	<h1>Welcome, $USER !</h1>
+	<h1>Welcome, <?=$this->session->userdata('user_alias')?>!</h1>
 
 	<div class="recent_reviews">
 		<h2>Recent Book Reviews:</h2>
