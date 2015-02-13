@@ -4,7 +4,7 @@ $autoload['packages'] = array();
 
 $autoload['libraries'] = array('database', 'session');
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'html');
 
 $autoload['config'] = array();
 

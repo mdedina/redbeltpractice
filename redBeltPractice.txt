@@ -1,0 +1,101 @@
+PAGES (views)
+	user/login_registration HTML DONE
+		POST login
+		POST registration
+	user/user  (User Reviews) HTML DONE
+		Show user information
+		Shows list of books the user has reviewed
+		Show a count of reviews
+		No POSTS
+
+	book/home  HTML DONE
+		Shows the list of all books, with links to books and users
+		Shows a list of 3 most recent reviews
+		Welcome message
+		Link to "Add Book and Review"
+		Link to Logout
+		No POSTs
+
+	book/add_book_review (Add Book and Review)  HTML DONE
+		Adds a new review to a new book
+		Adds a new author if author is not in database
+		POST book, author, review conent, review rating, user(hidden)
+		
+	book/book   HTML DONE
+		Shows all reviews for the book
+		Can add a new review to an existing book
+		Can delete a review (delete appears only if it's the logged user's review)
+		POST book(hidden), author(hidden), review content, review rating, user(hidden)
+
+DATABASE TABLES / MODELS
+(Each table (plural) has a corresponding Model object (singular) with CRUD methods)
+	Book
+		Title
+		link to Author (1 Author to many Books)
+
+	Author
+		Name
+
+	User
+		name
+		alias
+		email
+		password (encryption)?
+
+	Review
+		content
+		rating
+		link to Book (1 Book to many Reviews)
+		link to User (1 User to many Reviews)
+
+
+CONTROLLERS (plural)
+
+<General Principles for Controllers>
+I think controllers are more closely aligned with views than models. One or 2 methods per view (one to load the view, one to process posts from the view. Or one method for each form).
+
+The method that loads a view prepares data for the view and passes it.
+
+The method that handles posts then redirects to the appropriate view loading method.
+
+I don't think there are hard and fast rules about how to split up controllers. Probably roughly around the data, because they might share utility functions.
+
+You don't necessarily want CRUD methods, I think.
+< />
+
+	User
+		VIEWS
+		login_registration 
+			load the login_registration view
+		user ($id)
+			retrieve user info
+			load the user/user view	
+
+		POSTS	
+		login_post
+			Handle the login POST.
+				Retrieve from database.
+				Redirect to book/home or back to user/login_registration
+			what validation on login? same ones as for registration?
+		registration_post
+			Handle the registration POST.
+				Store in database
+				Redirect to book/home or back to user/login_registration
+		logout_post
+			Not actually a post...  just logs out current user.
+			Redirect to login_registration.
+	Book
+		VIEWS
+		home
+		add_book_review
+		book
+
+		POSTS
+		add_book_review_post
+		book_post
+		
+
+MISC
+	group by id
+	group concat on comments (gives a comma delimited string)
+	explode the comments
